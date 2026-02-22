@@ -675,7 +675,8 @@ body {
         try {
           await registerSW();
           const wispUrl = (location.protocol === "https:" ? "wss://" : "ws://") + location.host + "/wisp/";
-          await BareMux.SetTransport("EpxMod.EpoxyClient", { wisp: wispUrl });
+          const conn = new BareMux.BareMuxConnection("/baremux/worker.js");
+          await conn.setTransport("/epoxy/index.mjs", [{ wisp: wispUrl }]);
           console.log("Ultraviolet proxy initialized!");
         } catch (err) {
           console.error("Failed to initialize proxy:", err);
@@ -718,6 +719,7 @@ body {
     </script>
   </body>
 </html>
+
 
 
 
