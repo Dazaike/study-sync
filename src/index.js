@@ -33,8 +33,8 @@ server.on("request", (req, res) => {
 	res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
 
 	// Required headers for SharedArrayBuffer (needed by Epoxy/bare-mux)
-	// Only set on dashboard and UV routes, not on index.html (so it can be fetched cross-origin)
-	if (req.url.startsWith("/uv/service/")) {
+	// Skip only for index.html so Code.org sandbox can fetch it cross-origin
+	if (req.url !== "/" && req.url !== "/index.html") {
 		res.setHeader("Cross-Origin-Opener-Policy", "same-origin");
 		res.setHeader("Cross-Origin-Embedder-Policy", "require-corp");
 	}
