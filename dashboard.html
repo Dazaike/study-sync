@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StudySync Dashboard Workspace</title>
+    <link rel="stylesheet" href="dashboard.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- FontAwesome for Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <!-- Sidebar Navigation -->
+      <aside class="sidebar">
+        <div class="logo">
+          <div class="logo-icon">Σ</div>
+          <span>StudySync</span>
+        </div>
+        <nav class="sidebar-nav">
+          <a href="#" class="nav-item active">
+            <i class="fa-solid fa-house"></i>
+            <span>Dashboard</span>
+          </a>
+          <a href="#" class="nav-item">
+            <i class="fa-solid fa-gamepad"></i>
+            <span>Library</span>
+          </a>
+          <a href="#" class="nav-item">
+            <i class="fa-solid fa-globe"></i>
+            <span>Web Proxy</span>
+          </a>
+          <a href="#" class="nav-item">
+            <i class="fa-solid fa-gear"></i>
+            <span>Settings</span>
+          </a>
+        </nav>
+        <div class="user-profile">
+          <div class="avatar">
+            <i class="fa-solid fa-user"></i>
+          </div>
+          <div class="user-info">
+            <span class="user-name">Student</span>
+            <span class="user-role">Premium</span>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main Content Area -->
+      <main class="main-content">
+        <!-- Top Header -->
+        <header class="top-header">
+          <h2>Workspace Overview</h2>
+          <div class="header-actions">
+            <div class="clock" id="live-clock">12:00 PM</div>
+          </div>
+        </header>
+
+        <!-- Search / Proxy Bar -->
+        <section class="proxy-section">
+          <div class="proxy-container">
+            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+            <form id="proxy-form">
+              <input
+                type="text"
+                id="proxy-input"
+                placeholder="Search the web freely or enter a URL..."
+                autocomplete="off"
+              />
+            </form>
+            <div class="proxy-engine-badge">Ultraviolet Engine</div>
+          </div>
+          <p class="proxy-hint">
+            Press <strong>Enter</strong> to search securely. This traffic is
+            routed through the proxy.
+          </p>
+        </section>
+
+        <!-- Featured Apps & Games -->
+        <section class="library-section">
+          <div class="section-header">
+            <h3>Featured Applications</h3>
+            <a href="#" class="view-all">View All</a>
+          </div>
+
+          <div class="apps-grid">
+            <!-- App Card: 2048 -->
+            <a
+              href="https://play2048.co/"
+              target="_blank"
+              class="app-card"
+              onclick="loadInProxy(event, this.href)"
+            >
+              <div
+                class="app-icon"
+                style="background: linear-gradient(135deg, #edc22e, #f59563)"
+              >
+                <span>2048</span>
+              </div>
+              <div class="app-details">
+                <h4>2048</h4>
+                <p>Puzzle Game</p>
+              </div>
+            </a>
+
+            <!-- App Card: Minecraft Classic -->
+            <a
+              href="https://classic.minecraft.net/"
+              target="_blank"
+              class="app-card"
+              onclick="loadInProxy(event, this.href)"
+            >
+              <div
+                class="app-icon"
+                style="background: linear-gradient(135deg, #5b8c38, #825432)"
+              >
+                <i class="fa-solid fa-cube"></i>
+              </div>
+              <div class="app-details">
+                <h4>Minecraft</h4>
+                <p>Classic Web</p>
+              </div>
+            </a>
+
+            <!-- App Card: Discord -->
+            <a
+              href="https://discord.com/app"
+              target="_blank"
+              class="app-card"
+              onclick="loadInProxy(event, this.href)"
+            >
+              <div class="app-icon" style="background: #5865f2">
+                <i class="fa-brands fa-discord"></i>
+              </div>
+              <div class="app-details">
+                <h4>Discord</h4>
+                <p>Communication</p>
+              </div>
+            </a>
+
+            <!-- App Card: Reddit -->
+            <a
+              href="https://reddit.com"
+              target="_blank"
+              class="app-card"
+              onclick="loadInProxy(event, this.href)"
+            >
+              <div class="app-icon" style="background: #ff4500">
+                <i class="fa-brands fa-reddit-alien"></i>
+              </div>
+              <div class="app-details">
+                <h4>Reddit</h4>
+                <p>Social Media</p>
+              </div>
+            </a>
+
+            <!-- App Card: Slope -->
+            <a
+              href="https://slopegame.io/"
+              target="_blank"
+              class="app-card"
+              onclick="loadInProxy(event, this.href)"
+            >
+              <div
+                class="app-icon"
+                style="background: linear-gradient(135deg, #2dd4bf, #0ea5e9)"
+              >
+                <i class="fa-solid fa-shapes"></i>
+              </div>
+              <div class="app-details">
+                <h4>Slope</h4>
+                <p>Endless Runner</p>
+              </div>
+            </a>
+
+            <!-- App Card: YouTube -->
+            <a
+              href="https://youtube.com"
+              target="_blank"
+              class="app-card"
+              onclick="loadInProxy(event, this.href)"
+            >
+              <div class="app-icon" style="background: #ff0000">
+                <i class="fa-brands fa-youtube"></i>
+              </div>
+              <div class="app-details">
+                <h4>YouTube</h4>
+                <p>Video Platform</p>
+              </div>
+            </a>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- Hidden Iframe Container for Proxy Output -->
+    <div id="proxy-viewer-container" class="hidden">
+      <div class="proxy-viewer-header">
+        <button id="close-proxy-btn" class="icon-btn">
+          <i class="fa-solid fa-arrow-left"></i> Back to Dashboard
+        </button>
+        <div class="proxy-url-bar">
+          <i class="fa-solid fa-lock"></i>
+          <span id="current-proxy-url">Connecting...</span>
+        </div>
+        <div class="proxy-controls">
+          <button
+            class="icon-btn"
+            onclick="
+              document
+                .getElementById('proxy-frame')
+                .contentWindow.location.reload()
+            "
+          >
+            <i class="fa-solid fa-rotate-right"></i>
+          </button>
+        </div>
+      </div>
+      <iframe id="proxy-frame" src=""></iframe>
+    </div>
+
+    <script>
+      // Clock functionality
+      function updateClock() {
+        const now = new Date();
+        let hours = now.getHours();
+        let minutes = now.getMinutes();
+        const ampm = hours >= 12 ? "PM" : "AM";
+        hours = hours % 12;
+        hours = hours ? hours : 12;
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        document.getElementById("live-clock").innerText =
+          hours + ":" + minutes + " " + ampm;
+      }
+      setInterval(updateClock, 1000);
+      updateClock();
+
+      // Proxy Form Handling
+      const proxyForm = document.getElementById("proxy-form");
+      const proxyInput = document.getElementById("proxy-input");
+      const proxyContainer = document.getElementById("proxy-viewer-container");
+      const proxyFrame = document.getElementById("proxy-frame");
+      const closeProxyBtn = document.getElementById("close-proxy-btn");
+      const currentUrlDisplay = document.getElementById("current-proxy-url");
+
+      // Placeholder for Ultraviolet Ultraviolet configuration
+      // In a real implementation, this would point to your actual backend server
+      const ULTRAVIOLET_PREFIX =
+        "https://YOUR_BACKEND_URL.onrender.com/uv/service/";
+
+      function encodeXor(str) {
+        return encodeURIComponent(
+          str
+            .split("")
+            .map((char, ind) =>
+              ind % 2 ? String.fromCharCode(char.charCodeAt(0) ^ 2) : char,
+            )
+            .join(""),
+        );
+      }
+
+      // Simulating the proxy launch (since we don't have a backend yet)
+      function launchProxy(url) {
+        // Very basic URL handling
+        let finalUrl = url;
+        if (!/^http(s?):\/\//.test(finalUrl)) {
+          if (finalUrl.includes(".") && !finalUrl.includes(" ")) {
+            finalUrl = "https://" + finalUrl;
+          } else {
+            finalUrl =
+              "https://www.google.com/search?q=" + encodeURIComponent(finalUrl);
+          }
+        }
+
+        // Show the proxy viewer
+        document.querySelector(".dashboard-container").style.display = "none";
+        proxyContainer.classList.remove("hidden");
+        currentUrlDisplay.innerText = finalUrl;
+
+        // Notice: If you don't actually have an Ultraviolet backend running,
+        // putting random sites in an iframe will break because of X-Frame-Options.
+        // This is just a UI demonstration of how the dashboard hooks into it.
+
+        // Real Ultraviolet usage:
+        // proxyFrame.src = ULTRAVIOLET_PREFIX + encodeXor(finalUrl);
+
+        alert(
+          "Sandbox Note: Because you don't have an Ultraviolet backend setup yet, websites like Google/Reddit will block being put in this iframe. This is the UI framework ready for your backend.",
+        );
+        proxyFrame.src = finalUrl;
+      }
+
+      proxyForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const val = proxyInput.value.trim();
+        if (val) {
+          launchProxy(val);
+        }
+      });
+
+      // Function for clicking game/app cards
+      window.loadInProxy = function (event, url) {
+        event.preventDefault(); // Stop normal navigation
+        launchProxy(url);
+      };
+
+      // Close proxy viewer
+      closeProxyBtn.addEventListener("click", () => {
+        document.querySelector(".dashboard-container").style.display = "flex";
+        proxyContainer.classList.add("hidden");
+        proxyFrame.src = ""; // Clear iframe
+      });
+    </script>
+  </body>
+</html>

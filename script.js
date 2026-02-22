@@ -1,15 +1,17 @@
-document.getElementById('launchBtn').addEventListener('click', function() {
-    // Configuration
-    const proxyUrl = "https://www.wikipedia.org"; // Replace with your actual proxy or target URL
-    const fakeTitle = "Standardized Test Prep | Mathematics";
-    const fakeFavicon = "https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico"; // Google Docs icon
+document.getElementById("launchBtn").addEventListener("click", function () {
+  // Configuration
+  const proxyUrl =
+    "https://cdn.jsdelivr.net/gh/Dazaike/study-sync@main/study-sync/dashboard.html"; // Point to our custom dashboard
+  const fakeTitle = "Standardized Test Prep | Mathematics";
+  const fakeFavicon =
+    "https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico"; // Google Docs icon
 
-    // 1. Open a new about:blank window
-    const newWin = window.open("about:blank", "_blank");
+  // 1. Open a new about:blank window
+  const newWin = window.open("about:blank", "_blank");
 
-    if (newWin) {
-        // 2. Prepare the injected content
-        const injectedHtml = `
+  if (newWin) {
+    // 2. Prepare the injected content
+    const injectedHtml = `
             <!DOCTYPE html>
             <html lang="en" style="margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden;">
             <head>
@@ -40,15 +42,17 @@ document.getElementById('launchBtn').addEventListener('click', function() {
             </html>
         `;
 
-        // 3. Write content to the new window
-        newWin.document.open();
-        newWin.document.write(injectedHtml);
-        newWin.document.close();
+    // 3. Write content to the new window
+    newWin.document.open();
+    newWin.document.write(injectedHtml);
+    newWin.document.close();
 
-        // 4. Optional: Add a subtle confirmation or console log
-        console.log("Portal launched in about:blank tab.");
-    } else {
-        // Handle popup blocking
-        alert("The portal was blocked by your browser. Please allow popups for this site to access the workstation.");
-    }
+    // 4. Optional: Add a subtle confirmation or console log
+    console.log("Portal launched in about:blank tab.");
+  } else {
+    // Handle popup blocking
+    alert(
+      "The portal was blocked by your browser. Please allow popups for this site to access the workstation.",
+    );
+  }
 });
