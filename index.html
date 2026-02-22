@@ -94,9 +94,9 @@ document.getElementById('launchBtn').addEventListener('click', function () {
     fetch(proxyUrl)
       .then(r => r.text())
       .then(html => {
-        let injectedHtml = html.replace(/<title>.*?<\/title>/i, \<title>\ + fakeTitle + \</title>\);
+        let injectedHtml = html.replace(/<title>.*?<\/title>/i, "<title>" + fakeTitle + "</title>");
         if (!injectedHtml.includes('rel="icon"')) {
-           injectedHtml = injectedHtml.replace(/<head>/i, \<head><link rel="icon" type="image/x-icon" href="\ + fakeFavicon + \">\);
+           injectedHtml = injectedHtml.replace(/<head>/i, '<head><link rel="icon" type="image/x-icon" href="' + fakeFavicon + '">');
         }
         newWin.document.open();
         newWin.document.write(injectedHtml);
