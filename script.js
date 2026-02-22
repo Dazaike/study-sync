@@ -1,7 +1,7 @@
 document.getElementById("launchBtn").addEventListener("click", function () {
   // Configuration
   const proxyUrl =
-    "https://cdn.jsdelivr.net/gh/Dazaike/study-sync@main/dashboard.html"; // Point to our custom dashboard
+    "https://cdn.jsdelivr.net/gh/Dazaike/study-sync@main/dashboard.html?v=3"; // Point to our custom dashboard
   const fakeTitle = "Standardized Test Prep | Mathematics";
   const fakeFavicon =
     "https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico"; // Google Docs icon
