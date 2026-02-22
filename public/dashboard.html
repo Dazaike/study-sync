@@ -644,8 +644,12 @@ body {
       <iframe id="proxy-frame" src=""></iframe>
     </div>
 
+    <script src="/epoxy/index.js"></script>
+    <script src="/uv/uv.bundle.js"></script>
+    <script src="/uv/uv.config.js"></script>
+    <script src="/register-sw.js"></script>
     <script>
-      // Clock functionality
+      // Clock
       function updateClock() {
         const now = new Date();
         let hours = now.getHours();
@@ -654,13 +658,11 @@ body {
         hours = hours % 12;
         hours = hours ? hours : 12;
         minutes = minutes < 10 ? "0" + minutes : minutes;
-        document.getElementById("live-clock").innerText =
-          hours + ":" + minutes + " " + ampm;
+        document.getElementById("live-clock").innerText = hours + ":" + minutes + " " + ampm;
       }
       setInterval(updateClock, 1000);
       updateClock();
 
-      // Proxy Form Handling
       const proxyForm = document.getElementById("proxy-form");
       const proxyInput = document.getElementById("proxy-input");
       const proxyContainer = document.getElementById("proxy-viewer-container");
@@ -668,75 +670,53 @@ body {
       const closeProxyBtn = document.getElementById("close-proxy-btn");
       const currentUrlDisplay = document.getElementById("current-proxy-url");
 
-      // Placeholder for Ultraviolet Ultraviolet configuration
-      // In a real implementation, this would point to your actual backend server
-      const ULTRAVIOLET_PREFIX =
-        "https://YOUR_BACKEND_URL.onrender.com/uv/service/";
-
-      function encodeXor(str) {
-        return encodeURIComponent(
-          str
-            .split("")
-            .map((char, ind) =>
-              ind % 2 ? String.fromCharCode(char.charCodeAt(0) ^ 2) : char,
-            )
-            .join(""),
-        );
+      async function initProxy() {
+        try {
+          await registerSW();
+          const wispUrl = (location.protocol === "https:" ? "wss://" : "ws://") + location.host + "/wisp/";
+          await BareMux.SetTransport("EpxMod.EpoxyClient", { wisp: wispUrl });
+          console.log("Ultraviolet proxy initialized!");
+        } catch (err) {
+          console.error("Failed to initialize proxy:", err);
+        }
       }
+      initProxy();
 
-      // Simulating the proxy launch (since we don't have a backend yet)
       function launchProxy(url) {
-        // Very basic URL handling
         let finalUrl = url;
         if (!/^http(s?):\/\//.test(finalUrl)) {
           if (finalUrl.includes(".") && !finalUrl.includes(" ")) {
             finalUrl = "https://" + finalUrl;
           } else {
-            finalUrl =
-              "https://www.google.com/search?q=" + encodeURIComponent(finalUrl);
+            finalUrl = "https://www.google.com/search?q=" + encodeURIComponent(finalUrl);
           }
         }
-
-        // Show the proxy viewer
         document.querySelector(".dashboard-container").style.display = "none";
         proxyContainer.classList.remove("hidden");
         currentUrlDisplay.innerText = finalUrl;
-
-        // Notice: If you don't actually have an Ultraviolet backend running,
-        // putting random sites in an iframe will break because of X-Frame-Options.
-        // This is just a UI demonstration of how the dashboard hooks into it.
-
-        // Real Ultraviolet usage:
-        // proxyFrame.src = ULTRAVIOLET_PREFIX + encodeXor(finalUrl);
-
-        alert(
-          "Sandbox Note: Because you don't have an Ultraviolet backend setup yet, websites like Google/Reddit will block being put in this iframe. This is the UI framework ready for your backend.",
-        );
-        proxyFrame.src = finalUrl;
+        const encodedUrl = self.__uv$config.prefix + self.__uv$config.encodeUrl(finalUrl);
+        proxyFrame.src = encodedUrl;
       }
 
       proxyForm.addEventListener("submit", (e) => {
         e.preventDefault();
         const val = proxyInput.value.trim();
-        if (val) {
-          launchProxy(val);
-        }
+        if (val) { launchProxy(val); }
       });
 
-      // Function for clicking game/app cards
       window.loadInProxy = function (event, url) {
-        event.preventDefault(); // Stop normal navigation
+        event.preventDefault();
         launchProxy(url);
       };
 
-      // Close proxy viewer
       closeProxyBtn.addEventListener("click", () => {
         document.querySelector(".dashboard-container").style.display = "flex";
         proxyContainer.classList.add("hidden");
-        proxyFrame.src = ""; // Clear iframe
+        proxyFrame.src = "";
       });
     </script>
   </body>
 </html>
+
 
 
