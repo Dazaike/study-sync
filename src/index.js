@@ -28,9 +28,16 @@ app.use((req, res) => {
 const server = createServer();
 
 server.on("request", (req, res) => {
+	// Allow cross-origin fetches (needed for Code.org sandbox)
+	res.setHeader("Access-Control-Allow-Origin", "*");
+	res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
+
 	// Required headers for SharedArrayBuffer (needed by Epoxy/bare-mux)
-	res.setHeader("Cross-Origin-Opener-Policy", "same-origin");
-	res.setHeader("Cross-Origin-Embedder-Policy", "require-corp");
+	// Only set on dashboard and UV routes, not on index.html (so it can be fetched cross-origin)
+	if (req.url !== "/" && req.url !== "/index.html") {
+		res.setHeader("Cross-Origin-Opener-Policy", "same-origin");
+		res.setHeader("Cross-Origin-Embedder-Policy", "require-corp");
+	}
 	app(req, res);
 });
 
