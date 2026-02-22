@@ -34,7 +34,7 @@ server.on("request", (req, res) => {
 
 	// Required headers for SharedArrayBuffer (needed by Epoxy/bare-mux)
 	// Only set on dashboard and UV routes, not on index.html (so it can be fetched cross-origin)
-	if (req.url !== "/" && req.url !== "/index.html") {
+	if (req.url.startsWith("/uv/service/")) {
 		res.setHeader("Cross-Origin-Opener-Policy", "same-origin");
 		res.setHeader("Cross-Origin-Embedder-Policy", "require-corp");
 	}
@@ -70,3 +70,4 @@ function shutdown() {
 }
 
 server.listen({ port });
+
